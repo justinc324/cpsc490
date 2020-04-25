@@ -173,8 +173,15 @@ class SongCreator:
 
 # guitar leads
 
-#to C
-# # pm.transpose_songs("rock/lead_guitar/training_songs/original_keys/*.mid")
+# to C
+# pm.transpose_songs("rock/lead_guitar/training_songs/original_keys/*.mid")
+# pm.transpose_songs("rock/bass/training_songs/*.mid")
+# pm.transpose_songs("rock/vocals/training_songs/*.mid")
+# pm.transpose_songs("rock/drums/training_songs/*.mid")
+# pm.transpose_songs("rock/rhythm_guitar/training_songs/*.mid")
+
+
+
 # guitar = SongCreator("rock", "lead_guitar", parsed=False, epochs=200, batch_size=32)
 # guitar.train(save_weights=True)
 # guitar.create_song("all_songs_try_one.mid", intro_len=32, middle_len=128, outro_len=32)
