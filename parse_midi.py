@@ -182,13 +182,12 @@ def parse_notes(fp_songs, fp_out, intro_split=24, outro_split=24):
 
         song_notes = []
 
-        song = m21.converter.parse(file)
+        try:
+            song = m21.converter.parse(file)
+        except:
+            print("could not parse file")
+            continue
 
-        # parts = m21.instrument.partitionByInstrument(song)
-        #
-        # if parts:
-        #     notes_to_parse = parts.parts[0].recurse()
-        # else:
         notes_to_parse = song.flat.notes
 
         for element in notes_to_parse:
@@ -196,12 +195,12 @@ def parse_notes(fp_songs, fp_out, intro_split=24, outro_split=24):
             note = None
             # find out if the element is a rest, note, or chord
             if isinstance(element, m21.note.Rest):
-                # import pdb;pdb.set_trace()
+
                 note = "X"
             elif isinstance(element, m21.note.Note):
                 note = (str(convert_note(str(element.pitch))))
             elif isinstance(element, m21.chord.Chord):
-                # import pdb; pdb.set_trace()
+
                 note = ','.join(str(convert_note(str(n.pitch))) for n in element)
             else:
                 continue
