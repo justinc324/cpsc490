@@ -5,7 +5,7 @@ attrs==19.3.0
 Authlib==0.10
 Babel==2.7.0
 backcall==0.1.0
-bleach==3.1.0
+bleach==3.1.4
 certifi==2018.11.29
 cffi==1.11.5
 chardet==3.0.4
