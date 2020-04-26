@@ -33,6 +33,7 @@ class MusicRNN:
         try:
             self._model = multi_gpu_model(self._model, gpus=6)
         except:
+            print("failed at multi-GPU")
             pass
 
         self._model.compile(loss='categorical_crossentropy', optimizer='adam')
