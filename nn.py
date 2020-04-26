@@ -5,7 +5,7 @@ import numpy
 import tensorflow as tf
 from keras.callbacks import ModelCheckpoint
 from keras import Sequential
-from keras.layers import Dense, Dropout, LSTM, Bidirectional
+from keras.layers import Dense, Dropout, LSTM, Bidirectional, CuDNNLSTM
 
 
 
@@ -25,11 +25,20 @@ class MusicRNN:
         # self._model.add(Dense(self.num_features, activation='softmax'))
         # self._model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 
-        self._model = Sequential()
-        self._model.add(Bidirectional(LSTM(256, return_sequences=True, activation='relu', input_shape=(16, self.num_features))))
-        self._model.add(Dropout(.2))
-        self._model.add(Bidirectional(LSTM(256)))
-        self._model.add(Dense(self.num_features, activation='sigmoid'))
+        if tf.test.is_gpu_available():
+            self._model = Sequential()
+            self._model.add(
+                Bidirectional(CuDNNLSTM(512, return_sequences=True, activation='relu', input_shape=(16, self.num_features))))
+            self._model.add(Dropout(.2))
+            self._model.add(Bidirectional(CuDNNLSTM(512)))
+            self._model.add(Dense(self.num_features, activation='sigmoid'))
+
+        else:
+            self._model = Sequential()
+            self._model.add(Bidirectional(LSTM(256, return_sequences=True, activation='relu', input_shape=(16, self.num_features))))
+            self._model.add(Dropout(.2))
+            self._model.add(Bidirectional(LSTM(256)))
+            self._model.add(Dense(self.num_features, activation='sigmoid'))
 
         self._model.compile(loss='categorical_crossentropy', optimizer='adam')
 
