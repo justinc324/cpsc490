@@ -5,7 +5,6 @@ import numpy
 import tensorflow as tf
 from keras.callbacks import ModelCheckpoint
 from keras import Sequential
-from keras.utils import multi_gpu_model
 from keras.layers import Dense, Dropout, LSTM, Bidirectional
 
 
@@ -17,8 +16,6 @@ class MusicRNN:
         # notes manager
         self.notes_manager = notes_manager
         self.num_features = notes_manager.num_features
-
-        tf.compat.v1.disable_eager_execution()
 
         # model architecture
         # self._model = Sequential()
@@ -33,12 +30,6 @@ class MusicRNN:
         self._model.add(Dropout(.2))
         self._model.add(Bidirectional(LSTM(256)))
         self._model.add(Dense(self.num_features, activation='sigmoid'))
-
-        try:
-            self._model = multi_gpu_model(self._model, gpus=6)
-        except:
-            print("failed at multi-GPU")
-            pass
 
         self._model.compile(loss='categorical_crossentropy', optimizer='adam')
 
