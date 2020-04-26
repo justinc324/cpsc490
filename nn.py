@@ -32,6 +32,7 @@ class MusicRNN:
             self._model.add(Dropout(.2))
             self._model.add(Bidirectional(CuDNNLSTM(512)))
             self._model.add(Dense(self.num_features, activation='sigmoid'))
+            print("using GPU")
 
         else:
             self._model = Sequential()
@@ -39,6 +40,7 @@ class MusicRNN:
             self._model.add(Dropout(.2))
             self._model.add(Bidirectional(LSTM(256)))
             self._model.add(Dense(self.num_features, activation='sigmoid'))
+            print("using CPU")
 
         self._model.compile(loss='categorical_crossentropy', optimizer='adam')
 
