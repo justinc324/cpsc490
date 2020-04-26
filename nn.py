@@ -4,6 +4,7 @@ import keras
 import numpy
 from keras.callbacks import ModelCheckpoint
 from keras import Sequential
+from keras.utils import multi_gpu_model
 from keras.layers import Dense, Dropout, LSTM, Bidirectional
 
 
@@ -28,6 +29,12 @@ class MusicRNN:
         self._model.add(Dropout(.2))
         self._model.add(Bidirectional(LSTM(256)))
         self._model.add(Dense(self.num_features, activation='sigmoid'))
+
+        try:
+            self._model = multi_gpu_model(self._model)
+        except:
+            pass
+
         self._model.compile(loss='categorical_crossentropy', optimizer='adam')
 
         self._epochs = epochs
