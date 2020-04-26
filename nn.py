@@ -28,7 +28,7 @@ class MusicRNN:
         if tf.test.is_gpu_available():
             self._model = Sequential()
             self._model.add(
-                Bidirectional(CuDNNLSTM(512, return_sequences=True, activation='relu', input_shape=(16, self.num_features))))
+                Bidirectional(LSTM(256, return_sequences=True, activation='relu', input_shape=(16, self.num_features))))
             self._model.add(Dropout(.2))
             self._model.add(Bidirectional(CuDNNLSTM(512)))
             self._model.add(Dense(self.num_features, activation='sigmoid'))
