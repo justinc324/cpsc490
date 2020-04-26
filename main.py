@@ -1,5 +1,13 @@
 #!/usr/bin/python3
 
+"""
+Main program. Uses the command line to allow
+the user to interact with the RNN in a variety
+of ways, though not too deeply. Train the RNN,
+generate a song, load, and save models through
+the main() function.
+"""
+
 import sys
 import getopt
 import song_creator as sc

@@ -6,8 +6,33 @@ import parse_midi as pm
 
 
 class SongCreator:
+    """
+    An object that wraps both the RNN and its NotesManager object.
+    This allows for the training, generating of songs, and saving and
+    loading of models.
+
+    Three RNNs and three NoteManagers are created upon each instance
+    of SongCreator:
+
+    functions:
+    -train
+    -parse
+    -load_nn
+    -load_nn_weights
+    -save_model
+    -create_song
+    """
 
     def __init__(self, genre, instrument, parsed=False, epochs=100, batch_size=32):
+        """
+        genre: a string representing the intended genre of music
+        instrument: a string representing the instrument this
+        SongCreator represent
+        parsed: a Bool, set to True if the song has already been parsed
+        in genre/instrument/parsed_notes
+        epochs: an int, number of epochs to run during training.
+        batch_size: an int, the batch size used for training the networks.
+        """
 
         # set genre, instrument, and path
         self.genre = genre

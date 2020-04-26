@@ -1,5 +1,10 @@
 #!/usr/bin/python3
 
+"""
+Functions mainly responsible for generating
+notes from the RNN, as well as transcribing
+said notes to MIDI.
+"""
 import numpy
 import music21 as m21
 import helpers

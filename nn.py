@@ -17,6 +17,7 @@ class MusicRNN:
         self.notes_manager = notes_manager
         self.num_features = notes_manager.num_features
 
+        # use the GPU, if available, for faster training
         if tf.test.is_gpu_available():
             self._model = Sequential()
             self._model.add(
@@ -42,6 +43,10 @@ class MusicRNN:
     def train(self, training_input, training_output, filename=None):
         """
         Trains the RNN with the given training data
+
+        training_input:
+        training_output:
+        filename: an optional filename to save the model weights
         """
         # if a file name is given, save the weights during training
         if filename:
@@ -73,12 +78,21 @@ class MusicRNN:
         return pitch_prediction, length_prediction, prediction_encoded
 
     def load(self, filename):
+        """
+        loads the given model to the neural network.
+        """
         self._model = keras.models.load_model(filename)
 
     def save(self, filename):
+        """
+        saves the current model as the given file name.
+        """
         self._model.save(filename)
 
     def load_weights(self, filename):
+        """
+        loads the specified weights to the neural network.
+        """
         self._model.fit(self.notes_manager.training_input,
                         self.notes_manager.training_output, epochs=0)
         self._model.load_weights(filename)

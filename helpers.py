@@ -1,7 +1,13 @@
 #!/usr/bin/python3
 
+"""
+helper functions that aid the rest of the RNN and
+other programs, mostly do do with translating
+and transposing notes
+"""
 import music21 as m21
 import glob
+
 
 # dictionary converting notes to numbers
 note_to_num_conversion = {
@@ -52,6 +58,11 @@ minors = dict([("G#", 1), ("A-", 1),("A", 0),("A#", -1),("B-", -1),("B", -2),("C
 
 
 def transpose_songs(path):
+    """
+    Given a file path, transposes all songs in that path to A minor/C major
+    Courtesy of Dr. Nick Kelly
+    http://nickkellyresearch.com/python-script-transpose-midi-files-c-minor/
+    """
 
     for file in glob.glob(path):
         print(file)
@@ -76,6 +87,9 @@ def convert_note(note):
     converts a given note to a numerical representation
     C0 --> 0
     D4 --> 50
+
+    note: a string representing the note
+    returns: an integer
     """
 
     # grab the octave
@@ -96,6 +110,9 @@ def convert_number(number):
     converts a given number to its note representation
     0 --> C0
     50 -- > D4
+
+    number: a string or int representing the note
+    returns: a string representation of the note
     """
     number = int(number)
     pitch = (number % 12)
