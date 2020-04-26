@@ -79,6 +79,7 @@ def write_to_midi(notes, filename):
 
         pitch = n[0].split(",")
         duration = None
+        numerator = None
 
         # convert to float or grab fraction
         try:
@@ -121,6 +122,9 @@ def write_to_midi(notes, filename):
                 # import pdb; pdb.set_trace()
                 chord_notes = [helpers.convert_number(x) for x in pitch]
                 note = m21.chord.Chord(chord_notes, quarterLength=numerator/denominator)
+
+        elif duration == 0.0:
+            continue
 
         s1.append(note)
 
