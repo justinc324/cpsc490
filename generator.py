@@ -35,15 +35,8 @@ def generate_notes(neural_network, num_notes):
 
     for i in range(len(nums)):
         pattern.append(training_input[nums[i]][i].tolist())
-    # pattern = training_input[nums[0]].tolist()
-
-    # import pdb; pdb.set_trace()
 
     for _ in range(num_notes):
-
-        # pat = neural_network.notes_manager.one_hot_encoder.inverse_transform(numpy.asarray(pattern))
-        # import pdb;
-        # pdb.set_trace()
 
         pred_pitch, pred_length, pred_encoded = neural_network.predict_note(numpy.reshape(pattern, (1, sequence_length, num_features)))
 
