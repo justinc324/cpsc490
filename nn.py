@@ -31,7 +31,7 @@ class MusicRNN:
         self._model.add(Dense(self.num_features, activation='sigmoid'))
 
         try:
-            self._model = multi_gpu_model(self._model)
+            self._model = multi_gpu_model(self._model, gpus=6)
         except:
             pass
 
