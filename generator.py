@@ -91,6 +91,9 @@ def write_to_midi(notes, filename):
 
         note = None
 
+        if duration == 0.0:
+            duration = .5
+
         if duration:
             if len(pitch) == 1:
 
@@ -122,9 +125,6 @@ def write_to_midi(notes, filename):
                 # import pdb; pdb.set_trace()
                 chord_notes = [helpers.convert_number(x) for x in pitch]
                 note = m21.chord.Chord(chord_notes, quarterLength=numerator/denominator)
-
-        elif duration == 0.0:
-            continue
 
         s1.append(note)
 
