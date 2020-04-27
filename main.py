@@ -68,7 +68,7 @@ def main(argv):
         if not train:
             print("-t option required to save a NN")
 
-    nn = sc.SongCreator(music, instrument, parsed=True, epochs=200, batch_size=32)
+    nn = sc.SongCreator(music, instrument, parsed=False, epochs=200, batch_size=32)
 
     # train neural network if that was selected as an option
     if train:

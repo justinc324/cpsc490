@@ -8,6 +8,7 @@ from keras import Sequential
 from keras.layers import Dense, Dropout, LSTM, Bidirectional, CuDNNLSTM
 
 
+
 class MusicRNN:
 
     def __init__(self, notes_manager, epochs=100, batch_size=32):
