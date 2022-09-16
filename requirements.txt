@@ -78,7 +78,7 @@ opt-einsum==3.2.0
 os-service-types==1.7.0
 osc-lib==1.14.1
 oslo.i18n==3.24.0
-oslo.utils==3.42.0
+oslo.utils==4.10.1
 pandas==0.25.2
 pandocfilters==1.4.2
 parso==0.5.1
